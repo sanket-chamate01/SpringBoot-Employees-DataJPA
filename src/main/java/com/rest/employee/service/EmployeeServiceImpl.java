@@ -35,4 +35,17 @@ public class EmployeeServiceImpl implements EmployeeService{
     public void deleteById(int id) {
         employeeDAO.deleteById(id);
     }
+
+    @Override
+    @Transactional
+    public Employee update(Employee employee) {
+        Employee oldEmployee = employeeDAO.findById(employee.getId());
+        if(oldEmployee == null){
+            throw new RuntimeException("Employee not found");
+        }
+        oldEmployee.setEmail(employee.getEmail());
+        oldEmployee.setFirstName(employee.getFirstName());
+        oldEmployee.setLastName(employee.getLastName());
+        return employeeDAO.update(oldEmployee);
+    }
 }

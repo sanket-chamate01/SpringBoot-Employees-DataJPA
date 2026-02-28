@@ -38,6 +38,11 @@ public class EmployeeController {
         return employeeService.save(employee);
     }
 
+    @PutMapping("employees/update")
+    public Employee updateEmployee(@RequestBody Employee employee){
+        return employeeService.update(employee);
+    }
+
     @DeleteMapping("/employees/{employeeId}")
     public void deleteEmployee(@PathVariable int employeeId){
 

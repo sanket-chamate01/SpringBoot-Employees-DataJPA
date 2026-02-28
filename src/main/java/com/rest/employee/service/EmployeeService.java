@@ -1,10 +1,10 @@
-package com.rest.employee.dao;
+package com.rest.employee.service;
 
 import com.rest.employee.entity.Employee;
 
 import java.util.List;
 
-public interface EmployeeDAO {
+public interface EmployeeService {
 
     List<Employee> findAll();
 

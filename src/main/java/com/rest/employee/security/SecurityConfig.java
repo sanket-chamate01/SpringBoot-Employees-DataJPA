@@ -14,11 +14,21 @@ import javax.sql.DataSource;
 @Configuration
 public class SecurityConfig {
 
+    // this one is of custom tables, where there is no schema for members/roles table in spring security, we are fetching details using query
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource){
         // JdbcUserDetailsManager - tells spring security to use JDBC authentication with our data source
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
+        // "?" parameter value will be username from login page
+        // define query to retrieve user by username
+        jdbcUserDetailsManager.setUsersByUsernameQuery(
+                "select user_id, pw, active from members where user_id=?"
+        );
+        // define query to retrieve authority/role by username
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+                "select user_id, role from roles where user_id=?"
+        );
 
         return jdbcUserDetailsManager;
     }

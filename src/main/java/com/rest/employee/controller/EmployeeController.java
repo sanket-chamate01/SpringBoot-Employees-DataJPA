@@ -49,7 +49,7 @@ public class EmployeeController {
         if(employee == null){
             throw new RuntimeException("Employee with Id = " + employeeId + " not found");
         }
-
         employeeService.deleteById(employeeId);
+        System.out.println("Employee with ID: " + employeeId + " Deleted");
     }
 }
